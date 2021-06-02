@@ -1,5 +1,6 @@
 from card import *
 import random
+from player import *
 
 
 class Deck:
@@ -8,13 +9,12 @@ class Deck:
         
     def shuffle(self):
        random.shuffle(self.cards)    
+       
 
-    def get_last_cards(self):
-       return self.cards[-4:]
-    #    return (self.cards[-4:])
+    def move_last_cards(self, player: Player):
+        player.cards += self.cards[-2:]
+        del self.cards[-2:]
 
-    # def delete_last_cards(self):
-    #     return  del self.cards[-4:0]
    
     def __str__(self):
         return str(self.cards)
@@ -22,33 +22,18 @@ class Deck:
         
         
         
-cards = []
+# cards = []
        
-for suit in Card.SUITS:
-    for value in Card.VALUES:
-        cards.append(Card(value, suit))
+# for suit in Card.SUITS:
+#     for value in Card.VALUES:
+#         cards.append(Card(value, suit))
 
-deck = Deck(cards)
-deck.shuffle()
-print(deck.get_last_cards())
-
-
-# for i in range(13):
-#     last_card = deck.get_last_card()
-#     print(last_card)
-
+# deck = Deck(cards)
+# # deck.shuffle()
 # print(deck)
-# print(last_card)
+# print(deck.move_last_cards)
 
 
 
+# # get_spravka => return
 
-# deck.shuffle()
-
-# print(deck)
-
-# for cards in card:
-    
-# for ....,
-# for...
-#     добавление карты в cards

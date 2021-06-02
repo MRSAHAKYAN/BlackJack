@@ -56,4 +56,29 @@ order(do_sleep)
 
 # print_100()
 
+# 1. del -
+        # 2. self.cards -
+        # 3. [start:stop]
+        #     3.1. start
+        #     3.2. stop
+        #     3.3. step
+        
+        # list = [1, 2, 3, 4] - List
+        # list[0:2] => [3, 4] - List
+        
+   
+   # list = [1, 2, 3, 4]
+   # del list[0]
+   #  del list[0:2]
+
+# a = [3, 4, 5, 6, 7, 8] # - колода
+# b = [7, 8] # - то что у игрока в руках
+# a = [3, 4, 5, 6] # - колода после раздачи
+# b = []
+
+# b += a
+# print(a)
+# print(b)
+
+
 
