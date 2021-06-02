@@ -13,11 +13,7 @@ class Game:
         self.deck.shuffle()
         
         #TODO: Раздача по две карты всем игрокам
-        players_card = self.deck.get_last_card()
-        
-        
-        for player in self.players:
-            print(player)
+        players_card = self.deck.get_last_cards()
         # self.players = player
         
         
@@ -37,7 +33,7 @@ for suit in Card.SUITS:
 deck = Deck(cards)
 
 # Game([artyom, igor], deck).run()
-Game([igor], deck).run()
+Game([igor, artyom], deck).run()
 
 # print(artyom.cards, igor.cards)
 # def calculate_force(m, a):
