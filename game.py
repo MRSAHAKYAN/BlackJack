@@ -9,11 +9,10 @@ class Game:
     
     def run(self):
         
-        #TODO: Тасовка карт
-        self.deck.shuffle()
-        
         #TODO: Раздача по две карты всем игрокам
-        self.deck.move_last_cards(self.players[0])
+        for player in self.players:
+            self.deck.move_last_cards(player)
+
         # self.players = player
         
         
@@ -24,6 +23,8 @@ class Game:
 artyom = Player('Artyom', [])
 igor = Player('Igor', [])
 
+players = [artyom, igor]
+
 cards = []
        
 for suit in Card.SUITS:
@@ -31,12 +32,16 @@ for suit in Card.SUITS:
         cards.append(Card(value, suit))
 
 deck = Deck(cards)
-print(deck)
 
+deck.shuffle()
+print('Before dealing: ', deck)
 # Game([artyom, igor], deck).run()
-Game([igor, artyom], deck).run()
-print(igor.cards)
-print(deck)
+
+g = Game(players, deck)
+g.run()
+for player in players:
+    print("%s's cards " % player.name, player.cards)
+print('After dealing: ', deck)
 
 # print(artyom.cards, igor.cards)
 # def calculate_force(m, a):
