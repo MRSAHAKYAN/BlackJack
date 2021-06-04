@@ -13,10 +13,15 @@ class Game:
         for player in self.players:
             self.deck.move_last_cards(player)
 
-        # self.players = player
         
+    def take_cards(self):
+        for player in self.players:
+            take_card = input("%s's Хотите взять еще одну карту? (y/n) " %player.name)
+            if take_card == 'y':
+                self.deck.take_a_card(player)
         
-        # return  players_card
+        #   if take_card == 'n':
+        #        break
 
 
 
@@ -43,21 +48,7 @@ for player in players:
     print("%s's cards " % player.name, player.cards)
 print('After dealing: ', deck)
 
-# print(artyom.cards, igor.cards)
-# def calculate_force(m, a):
-#     return  m * a
-
-# F = calculate_force(5, 3)
-
-# print('F = %d' % (m * a))
-
-# def get_distance(x1, y1, x2, y2):
-#     return Math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2)
-
-
-
-# def print_100():
-#     for i in range(1, 101):
-#         print(i)
-
-# print_100()
+g.take_cards()
+for player in players:
+    print("%s's cards " % player.name, player.cards)
+print('After dealing: ', deck)

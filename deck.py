@@ -15,6 +15,10 @@ class Deck:
         player.cards += self.cards[-2:]
         del self.cards[-2:]
 
+    def take_a_card(self, player: Player):
+        player.cards += self.cards[-1:]
+        del self.cards[-1:]
+
    
     def __str__(self):
         return str(self.cards)
