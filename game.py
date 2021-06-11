@@ -2,6 +2,7 @@ from player import *
 from deck import *
 from typing import List
 from cards_weight import *
+# from card_collection import *
 
 
 class Game:
@@ -12,7 +13,7 @@ class Game:
     def run(self):
         #TODO: Раздача по две карты всем игрокам
         for player in self.players:
-            self.deck.move_last_cards(player)
+            self.deck.move_last_cards(player, -2)
 
         
     def take_cards(self):

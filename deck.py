@@ -1,19 +1,20 @@
 from card import *
 import random
 from player import *
+from card_collection import *
 
 
-class Deck:
+class Deck(CardCollection):
     def __init__(self, cards):
-        self.cards = cards
+        super().__init__(cards)
         
     def shuffle(self):
        random.shuffle(self.cards)    
        
 
-    def move_last_cards(self, player: Player):
-        player.cards += self.cards[-2:]
-        del self.cards[-2:]
+    # def move_last_cards(self, player: Player):
+    #     player.cards += self.cards[-2:]
+    #     del self.cards[-2:]
 
     def take_card(self, player: Player):
         player.cards += self.cards[-1:]
@@ -32,15 +33,15 @@ class Deck:
         
     
         
-cards = []
+# cards = []
        
-for suit in Card.SUITS:
-    for value in Card.VALUES:
-        cards.append(Card(value, suit))
+# for suit in Card.SUITS:
+#     for value in Card.VALUES:
+#         cards.append(Card(value, suit))
 
-deck = Deck(cards)
-deck.flip_deck()   
-print(deck)
+# deck = Deck(cards)
+# deck.flip_deck()   
+# print(deck)
 # deck.flip_deck()
 # # deck.shuffle()
 
