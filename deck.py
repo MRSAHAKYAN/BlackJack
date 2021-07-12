@@ -9,11 +9,7 @@ class Deck(CardCollection):
         super().__init__(cards)
         
     def shuffle(self):
-       random.shuffle(self.cards)    
-
-    def take_card(self, player: Player):
-        player.cards += self.cards[-1:]
-        del self.cards[-1:]
+       random.shuffle(self.cards)
 
     def flip_deck(self):
         for i in range(len(self.cards) // 2):
