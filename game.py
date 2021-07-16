@@ -54,10 +54,15 @@ class Game(Publisher):
     def verdict(self):
         #TODO:
         # 1. Отобрать игроков, у кого не больше 21 очков
-        # 2. Выбрать игрока с максимальным количеством очков (из оставшихся)
-
+        # 2. Выбрать игрока с максимальным количеством очков (из оставшихся), 
+        # если у игроков одинаковые очки вернуть ничью
         pp = list(filter(lambda p: CardWeight.get_weight_cards(p.cards) <= 21, self.players))
-        if len(set(pp)) > 1:
+        # players = [Pl, Pl, Pl]
+        # list(map(players)) => [21, 19, 24]
+        # print(players) => [Pl, Pl, Pl]
+        scores = set(map(lambda p: CardWeight.get_weight_cards(p.cards), pp))
+        if len(scores) > 1:
             return max(pp, key=lambda p: CardWeight.get_weight_cards(p.cards))
-        else:
-            return None
+            
+        return None
+
