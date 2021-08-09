@@ -1,11 +1,13 @@
-from card import *
+from card import Card
 import random
-from player import *
-from card_collection import *
+from player import Player
+from card_collection import CardCollection
 
 
 class Deck(CardCollection):
-    def __init__(self, cards):
+    def __init__(self, cards=None):
+        if cards is None:
+            cards = []
         super().__init__(cards)
         
     def shuffle(self):

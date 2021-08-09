@@ -1,10 +1,10 @@
-from player import *
-from deck import *
+from player import Player
+from deck import Deck
 from typing import List
 from cards_weight import *
-from game import *
-from card_collection import *
-from notifications import * 
+from game import Game
+from card_collection import CardCollection
+from notifications import Publisher, Observer
 
 
 def output():
@@ -13,11 +13,11 @@ def output():
     print('After dealing: ', deck)
 
 
-artyom = Player('Artyom')
-
-igor = Player('Igor')
-
-players = [artyom, igor]
+players = [
+   Player('Artyom'),
+   Player('Igor'),
+#    Player('Arsen'),
+]
 
 cards = []
        
