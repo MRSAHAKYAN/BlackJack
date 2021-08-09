@@ -1,9 +1,9 @@
-from player import *
-from deck import *
+from player import Player
+from deck import Deck
 from typing import List
-from cards_weight import *
-from card_collection import *
-from notifications import *
+from cards_weight import CardWeight
+from card_collection import CardCollection
+from notifications import Publisher
 
 
 class Game(Publisher):
@@ -11,58 +11,46 @@ class Game(Publisher):
         self.players = players
         self.deck = deck
         self.turn = 0
-
-        self.rejects= {}
-    
+        
     def _next(self):
         self.turn += 1
+        if self.is_finish():
+            self.notify('win', self.verdict())
 
     def run(self):
-        #TODO: Раздача по две карты всем игрокам
         for player in self.players:
             self.deck.move_last_cards(player, 2)
-
         self.notify('start')
         
     def your_turn(func):
         def wrapper(self, player):
            if player == self.players[self.turn]:
-            #    return func(self, player) => take_card(self, player) => False
                 return func(self, player)
         return wrapper
        
     @your_turn  
     def take_card(self, player: Player) -> bool:
+        ''' Gives one card from the deck to the player '''
         self.deck.move_last_cards(player, 1)
         weight = CardWeight.get_weight_cards(player.cards)
         if weight > 21:
-            self.notify('lose', player.name)
             self._next()
-            
         return weight > 21
     
     @your_turn
-    def reject(self, player: Player):      
-        self.rejects[player.name] = 'reject'
+    def reject(self, player: Player):    
         self._next()
-        if self.is_finish():
-           self.notify('win', self.verdict())
                 
     def is_finish(self) -> bool:
         return self.turn == len(self.players) 
 
-    def verdict(self):
-        #TODO:
-        # 1. Отобрать игроков, у кого не больше 21 очков
-        # 2. Выбрать игрока с максимальным количеством очков (из оставшихся), 
-        # если у игроков одинаковые очки вернуть ничью
+    def verdict(self) -> Player:
+        # 1. Выбрать игроков с максимальным количеством очков до 21 включительно => [...]
+        # 2. Если у игроков одинаковые очки вернуть ничью
         pp = list(filter(lambda p: CardWeight.get_weight_cards(p.cards) <= 21, self.players))
-        # players = [Pl, Pl, Pl]
-        # list(map(players)) => [21, 19, 24]
-        # print(players) => [Pl, Pl, Pl]
         scores = set(map(lambda p: CardWeight.get_weight_cards(p.cards), pp))
-        if len(scores) > 1:
+        if len(scores) > 1 or \
+            (len(scores) == 1 and len(pp) == 1):
             return max(pp, key=lambda p: CardWeight.get_weight_cards(p.cards))
-            
         return None
 
